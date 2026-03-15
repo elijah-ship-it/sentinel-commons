@@ -1,36 +1,87 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Sentinel Commons
 
-## Getting Started
+**Human-governed AI agent infrastructure — with built-in safety monitoring, sovereign auditability, and cross-chain coordination.**
 
-First, run the development server:
+Any time you give an AI agent real authority — over money, decisions, coordination, or resources — Sentinel Commons ensures it's safe, accountable, and human-governed.
+
+## The Problem
+
+AI agents are managing real things: treasuries, grants, communities, resources. But nobody has built infrastructure to make them trustworthy:
+
+1. **Agents can be tricked** — social engineering, prompt injection, authority spoofing
+2. **Agents can deceive** — appearing safe in tests, behaving differently in production
+3. **Logs can be deleted** — no tamper-proof proof of what an agent did
+4. **Bots can govern** — sybil attacks on voting and policy systems
+
+## The Solution: Three Layers
+
+### 1. Safety Watchdog (Inspect AI)
+Continuously attacks our own agents to find weaknesses before bad actors do. Reusable evaluation harness for social engineering, prompt injection, data exfiltration, evaluation awareness, and deceptive reasoning.
+
+### 2. Human Governance (Human Passport / Holonym)
+Only verified humans — not bots — can set agent policies, vote, and override decisions. Proof of humanity via on-chain SBT on Optimism.
+
+### 3. Tamper-Proof Receipts (Lit Protocol + Bittensor)
+Every action is cryptographically signed in TEE hardware (Lit Protocol) and stored on a censorship-resistant network (Bittensor). Nobody can delete the receipts.
+
+## Integrated Technologies
+
+| Technology | Purpose | Track |
+|-----------|---------|-------|
+| **Inspect AI** | Safety evaluation framework | Protocol Labs |
+| **Bittensor** | Censorship-resistant audit trail | Sovereign Infrastructure |
+| **Solana** | Settlement layer | Agentic Funding |
+| **Metaplex Agent Registry** | On-chain agent identity | Metaplex |
+| **Meteora DLMM** | LP management and yield | Meteora |
+| **Arkhai/Alkahest** | Conditional escrow | Arkhai |
+| **Unbrowse** | Web intelligence | Unbrowse |
+| **Lit Protocol** | TEE signing and encryption | Lit Protocol |
+| **Human Passport/Holonym** | Sybil-resistant verification | Human Tech |
+| **x402** | Agent-to-agent payments | Solana |
+
+## Threat Model (Bittensor Track)
+
+**Threat:** A cloud provider could be compelled to delete agent safety logs, making past misbehavior unprovable.
+
+**Protection:** Evaluation hashes stored on Bittensor — persists even if servers are compromised or legally ordered to delete data.
+
+**Limitations:** Hashes stored (not full data); testnet for demo; evaluator itself must be trusted.
+
+**Cryptographic assumptions:** SHA-256 collision resistance; Lit Protocol TEE integrity; Bittensor consensus for immutability.
+
+## Safety Evaluation (Protocol Labs Track)
+
+**Failure mode:** Can a treasury agent be socially engineered into unauthorized fund transfers?
+
+11 adversarial scenarios across 5 attack categories: social engineering, prompt injection, data exfiltration, evaluation awareness, deceptive reasoning.
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+cd safety
+pip install -r requirements.txt
+export ANTHROPIC_API_KEY=your-key
+inspect eval eval_harness.py::full_safety_suite --model anthropic/claude-sonnet-4-20250514
+inspect view
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Quick Start
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+git clone https://github.com/elijah-ship-it/sentinel-commons.git
+cd sentinel-commons
+pnpm install
+cp .env.example .env.local  # Edit with your API keys
+pnpm dev
+# Open http://localhost:3000
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Project Status
 
-## Learn More
+New build created at the Intelligence at the Frontier Hackathon (March 14-15, 2026) — Funding the Commons & Protocol Labs @ Frontier Tower, San Francisco.
 
-To learn more about Next.js, take a look at the following resources:
+## Team
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- **Elijah Umana** — [GitHub](https://github.com/ElijahUmana)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## License
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+MIT
